@@ -48,3 +48,4 @@ curl -X POST http://localhost:8080/cep \
   -H "Content-Type: application/json" \
   -d '{"cep": "01310930"}'
 ```
+Para acompanhar o tracing pelo Zipkin, acesse o endereço http://localhost:9411/ e clique em "Run Query"
