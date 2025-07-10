@@ -2,13 +2,13 @@ package webserver
 
 import (
 	"encoding/json"
-	"net/http"
-
 	"github.com/DeboraIK/lab2-OTEL/internal/dto"
 	"github.com/DeboraIK/lab2-OTEL/internal/entity"
+	"github.com/DeboraIK/lab2-OTEL/internal/validators"
 	usecase "github.com/DeboraIK/lab2-OTEL/use-case"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/propagation"
+	"net/http"
 )
 
 func (s *WebServer) ZipCode(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +35,7 @@ func (s *WebServer) ZipCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(requestData.ZipCode) != 8 {
+	if !validators.IsValidZipCode(requestData.ZipCode) {
 		http.Error(w, entity.ErrInvalidZipCode.Error(), http.StatusUnprocessableEntity)
 		return
 	}

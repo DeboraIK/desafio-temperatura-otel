@@ -40,13 +40,8 @@ func GetA(ctx context.Context, data *dto.ZipCode) (*dto.Temperature, error) {
 		return nil, entity.ErrCannotFindZipcode
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, entity.ErrB
-	}
-
 	var t dto.Temperature
 	err = json.NewDecoder(resp.Body).Decode(&t)
-
 	if err != nil {
 		log.Println(err.Error())
 		return nil, entity.ErrInternalServer
